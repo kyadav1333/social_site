@@ -1,0 +1,15 @@
+{% extends "base.html" %} {% block content %}
+<div class="Jumbotron">
+  <h2>Please login</h2>
+
+  <form method="post" action="{% url 'login' %}">
+    <!-- yaha pr jo home hai vo blog k andr name hai -->
+    {% csrf_token %}
+    <!-- <input type="text" name="abcd" placeholder="Enter your name" />
+    <input type="text" name="abcde" placeholder="Enter your age" /> -->
+    {{ form.as_p }}
+
+    <input class="btn btn-primary" type="submit" value="Login" />
+  </form>
+</div>
+{% endblock content %}

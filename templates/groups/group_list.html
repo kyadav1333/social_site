@@ -1,0 +1,42 @@
+{% extends "groups/group_base.html" %} {% block pregroup %}
+
+<div class="col-md-4">
+  <div class="context">
+    {% if user.is_authenticated %}
+
+    <h2>Welcome {{user.username}}</h2>
+    {% endif %}
+    <h2>Groups</h2>
+    <p>
+      Welcome to 2Gether Groups
+      <br />Select your Group
+    </p>
+  </div>
+  {% if user.is_authenticated %}
+  <a href="{% url 'groups:create' %}" class="btn-warning" role="button">
+    <span class="fa fa-plus"></span>Create New</a
+  >
+  {% endif %}
+</div>
+
+{% endblock %} {% block group_content %}
+<div class="col-md-8">
+  <div class="list-group">
+    {% for group in object_list %}
+    <a
+      href="{% url 'groups:detail' slug=group.slug %}"
+      class="list-group-item list-groupitem-action flex-column align-items-start"
+    >
+      <h3 class="mb-1">{{group.name}}</h3>
+      {% endfor %}
+      <p class="mb-1">{{group.description_html|safe}}</p>
+      <div class="d-flex w-40 justift-content-between">
+        <small class="text-muted">
+          <span class="badge badge-secondry"> {{group.members.count}} </span
+          >member{{group.members.count|pluralize}}
+        </small>
+      </div>
+    </a>
+  </div>
+</div>
+{% endblock %}
